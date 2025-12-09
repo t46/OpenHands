@@ -1,0 +1,8 @@
+{
+  "summary": {
+    "total_failures": 0,
+    "analysis_depth": "individual_root_cause",
+    "solution_specificity": "actionable_and_concrete"
+  },
+  "failures_by_instance": {}
+}

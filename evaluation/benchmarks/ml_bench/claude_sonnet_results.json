@@ -1,0 +1,352 @@
+{
+  "model": "claude-sonnet-4-5-20250929",
+  "evaluation_date": "2025-11-25",
+  "summary": {
+    "total_tasks": 68,
+    "successful": 39,
+    "failed": 29,
+    "success_rate": "57.4%"
+  },
+  "results": [
+    {
+      "instance_id": 3,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 5,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 6,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 9,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 11,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 15,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 16,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 17,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 23,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 25,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 28,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 29,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 32,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 33,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 37,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 41,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 45,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 49,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 53,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 61,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 65,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 73,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 77,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 81,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 85,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 89,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 93,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 101,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 105,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 109,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 113,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 117,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 121,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 129,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 141,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 145,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 151,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 164,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 168,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 172,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 176,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 198,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 202,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 204,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 210,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 214,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 228,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 230,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 232,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 234,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 236,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 238,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 240,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 242,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 244,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 246,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 248,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 252,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 254,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 256,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 260,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 264,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 264,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 268,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 268,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 272,
+      "status": "失敗",
+      "success": 0
+    },
+    {
+      "instance_id": 276,
+      "status": "成功",
+      "success": 1
+    },
+    {
+      "instance_id": 280,
+      "status": "成功",
+      "success": 1
+    }
+  ]
+}

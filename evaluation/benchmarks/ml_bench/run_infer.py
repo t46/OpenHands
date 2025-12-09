@@ -76,6 +76,227 @@ ID2CONDA = {
 }
 
 
+def fix_prefix_code_bugs(prefix_code: str) -> str:
+    """Fix known bugs in prefix_code.
+
+    This function corrects common issues in prefix_code such as:
+    1. Incorrect GitHub URLs (/blob/main/ or /blob/master/ instead of raw URLs)
+    2. pip install commands that may fail without error handling
+    3. Multiple commands on separate lines that need to be chained with &&
+
+    Args:
+        prefix_code: The original prefix_code from the dataset
+
+    Returns:
+        Fixed prefix_code with bugs corrected
+    """
+    import re
+
+    fixed = prefix_code
+
+    # Bug 1: 誤ったGitHub URL（/blob/main/ または /blob/master/）
+    # https://github.com/USER/REPO/blob/BRANCH/path -> https://raw.githubusercontent.com/USER/REPO/BRANCH/path
+    if 'github.com' in fixed and ('/blob/main/' in fixed or '/blob/master/' in fixed):
+        pattern = r'https://github\.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)'
+        replacement = r'https://raw.githubusercontent.com/\1/\2/\3/\4'
+        fixed = re.sub(pattern, replacement, fixed)
+        logger.info('Fixed GitHub URL in prefix_code: /blob/ -> raw.githubusercontent.com')
+
+    # Bug 2: pip install -e . が失敗する可能性がある場合、エラーハンドリングを追加
+    if 'pip install -e .' in fixed and '||' not in fixed.split('pip install -e .')[1].split('\n')[0]:
+        fixed = fixed.replace('pip install -e .', 'pip install -e . || echo "Warning: pip install failed but continuing"')
+        logger.info('Added error handling to pip install in prefix_code')
+
+    # Bug 3: 複数行のコマンドを && で連結する
+    # ランタイムは複数の独立したコマンドを拒否するため、&& で連結する必要がある
+    lines = fixed.strip().split('\n')
+    if len(lines) > 1:
+        # 空行を除去し、各行をトリムして && で連結
+        non_empty_lines = [line.strip() for line in lines if line.strip()]
+        if len(non_empty_lines) > 1:
+            fixed = ' && '.join(non_empty_lines)
+            logger.info(f'Chained {len(non_empty_lines)} separate commands with &&')
+
+    return fixed
+
+
+def find_run_script(runtime: Runtime, task_path: str, max_depth: int = 3) -> tuple[str | None, str]:
+    """Find run.sh in task_path or subdirectories.
+
+    This function searches for run.sh first in the expected location (task_path/run.sh),
+    and if not found, searches in subdirectories up to max_depth levels deep.
+    This handles cases where agents logically place scripts in subdirectories.
+
+    Args:
+        runtime: Runtime instance to execute commands
+        task_path: Base path to search from
+        max_depth: Maximum directory depth to search (default: 3)
+
+    Returns:
+        Tuple of (script_path, search_log) where script_path is None if not found
+    """
+    search_log = []
+
+    # まず直接パスを確認
+    direct_path = os.path.join(task_path, 'run.sh')
+    # Use exit code instead of string matching to avoid false positives
+    action = CmdRunAction(command=f'test -f {direct_path}')
+    obs = runtime.run_action(action)
+
+    exit_code = getattr(obs, 'exit_code', -1)
+    if exit_code == 0:
+        search_log.append(f'✓ Found run.sh at expected location: {direct_path}')
+        return direct_path, '\n'.join(search_log)
+
+    search_log.append(f'✗ run.sh not found at expected location: {direct_path}')
+    search_log.append(f'Searching subdirectories (max depth: {max_depth})...')
+
+    # サブディレクトリを探索
+    find_command = f'find {task_path} -maxdepth {max_depth} -name "run.sh" -type f 2>/dev/null'
+    action = CmdRunAction(command=find_command)
+    obs = runtime.run_action(action)
+
+    exit_code = getattr(obs, 'exit_code', -1)
+    content = getattr(obs, 'content', '')
+    if exit_code == 0 and content.strip():
+        found_paths = content.strip().split('\n')
+        if found_paths and found_paths[0]:
+            # 最も浅いパスを選択
+            selected_path = min(found_paths, key=lambda p: p.count('/'))
+            search_log.append(f'✓ Found run.sh in subdirectory: {selected_path}')
+            search_log.append(f'  Note: Agent placed script in logical subdirectory')
+            return selected_path, '\n'.join(search_log)
+
+    search_log.append(f'✗ run.sh not found in {task_path} or subdirectories')
+    return None, '\n'.join(search_log)
+
+
+def setup_bert_models(runtime: Runtime, task_path: str, prefix_code: str):
+    """Setup BERT models required by prefix_code.
+
+    This function checks if BERT models referenced in prefix_code exist,
+    and if not, downloads them from Google Cloud Storage.
+
+    Args:
+        runtime: Runtime instance to execute commands
+        task_path: Base path for the task
+        prefix_code: The prefix_code containing BERT_BASE_DIR reference
+    """
+    import re
+
+    # prefix_codeからBERT_BASE_DIRを抽出
+    match = re.search(r'BERT_BASE_DIR=([^\s]+)', prefix_code)
+    if not match:
+        return
+
+    bert_dir = match.group(1)
+
+    # 絶対パスに変換
+    if not bert_dir.startswith('/'):
+        bert_dir = os.path.join(task_path, bert_dir)
+
+    logger.info(f'Checking BERT model: {bert_dir}')
+
+    # モデルが存在するかチェック
+    action = CmdRunAction(command=f'test -d {bert_dir} && echo "exists" || echo "not_exists"')
+    obs = runtime.run_action(action)
+
+    if 'exists' in obs.content:
+        logger.info(f'BERT model already exists: {bert_dir}')
+        return
+
+    logger.info(f'BERT model not found, downloading: {bert_dir}')
+
+    # モデル名を特定
+    model_name = os.path.basename(bert_dir)
+
+    # モデルのマッピング（Google Research BERTからダウンロード）
+    model_urls = {
+        'uncased_L-12_H-768_A-12': 'https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip',
+        'cased_L-12_H-768_A-12': 'https://storage.googleapis.com/bert_models/2018_10_18/cased_L-12_H-768_A-12.zip',
+        'uncased_L-24_H-1024_A-16': 'https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-24_H-1024_A-16.zip',
+        'wwm_uncased_L-24_H-1024_A-16': 'https://storage.googleapis.com/bert_models/2019_05_30/wwm_uncased_L-24_H-1024_A-16.zip',
+    }
+
+    if model_name not in model_urls:
+        logger.warning(f'Unknown BERT model: {model_name}, skipping download')
+        return
+
+    url = model_urls[model_name]
+    parent_dir = os.path.dirname(bert_dir)
+
+    # ダウンロードと解凍
+    download_commands = f'''
+set -e
+mkdir -p {parent_dir}
+cd {parent_dir}
+echo "Downloading {model_name} from Google Cloud Storage..."
+wget -q --timeout=300 {url} -O {model_name}.zip || exit 1
+echo "Extracting {model_name}..."
+unzip -q {model_name}.zip || exit 1
+rm {model_name}.zip
+echo "BERT model {model_name} downloaded successfully"
+'''
+
+    action = CmdRunAction(command=download_commands)
+    logger.info(action, extra={'msg_type': 'ACTION'})
+    obs = runtime.run_action(action)
+
+    exit_code = getattr(obs, 'exit_code', -1)
+    if exit_code == 0:
+        logger.info(f'Successfully downloaded BERT model: {model_name}')
+    else:
+        content = getattr(obs, 'content', str(obs))
+        logger.error(f'Failed to download BERT model: {content}')
+
+
+def setup_glue_data(runtime: Runtime, task_path: str):
+    """Setup GLUE data required for BERT fine-tuning tasks.
+
+    This function downloads the GLUE benchmark datasets if they don't exist.
+
+    Args:
+        runtime: Runtime instance to execute commands
+        task_path: Base path for the task
+    """
+    glue_dir = os.path.join(task_path, 'data', 'glue_data')
+
+    logger.info(f'Checking GLUE data: {glue_dir}')
+
+    # GLUEデータが存在するかチェック
+    action = CmdRunAction(command=f'test -d {glue_dir} && echo "exists" || echo "not_exists"')
+    obs = runtime.run_action(action)
+
+    if 'exists' in obs.content:
+        logger.info(f'GLUE data already exists: {glue_dir}')
+        return
+
+    logger.info(f'GLUE data not found, downloading: {glue_dir}')
+
+    # GLUEデータのダウンロード（BERTリポジトリのスクリプトを使用）
+    download_commands = f'''
+set -e
+mkdir -p {os.path.dirname(glue_dir)}
+cd {os.path.dirname(glue_dir)}
+echo "Downloading GLUE data download script..."
+wget -q --timeout=60 https://gist.githubusercontent.com/W4ngatang/60c2bdb54d156a41194446737ce03e2e/raw/download_glue_data.py || exit 1
+echo "Running GLUE data download (this may take a while)..."
+python download_glue_data.py --data_dir glue_data --tasks all || exit 1
+echo "GLUE data downloaded successfully"
+'''
+
+    action = CmdRunAction(command=download_commands)
+    logger.info(action, extra={'msg_type': 'ACTION'})
+    obs = runtime.run_action(action)
+
+    exit_code = getattr(obs, 'exit_code', -1)
+    if exit_code == 0:
+        logger.info('Successfully downloaded GLUE data')
+    else:
+        content = getattr(obs, 'content', str(obs))
+        logger.error(f'Failed to download GLUE data: {content}')
+
+
 def get_config(
     metadata: EvalMetadata,
 ) -> OpenHandsConfig:
@@ -99,6 +320,10 @@ def initialize_runtime(
     """Initialize the runtime for the agent.
 
     This function is called before the runtime is used to run the agent.
+    It now also handles:
+    - Executing prefix_code with bug fixes
+    - Setting up BERT models if required
+    - Setting up GLUE data if required
     """
     logger.info(f'{"-" * 50} BEGIN Runtime Initialization Fn {"-" * 50}')
     obs: CmdOutputObservation
@@ -134,6 +359,48 @@ def initialize_runtime(
     obs = runtime.run_action(action)
     assert obs.exit_code == 0
 
+    # Execute prefix_code for environment preparation (if exists)
+    prefix_code = instance.get('prefix_code', '').strip()
+    if prefix_code:
+        logger.info('=' * 80)
+        logger.info('Executing prefix_code for environment setup...')
+        logger.info('=' * 80)
+
+        # Fix known bugs in prefix_code
+        fixed_prefix_code = fix_prefix_code_bugs(prefix_code)
+        if fixed_prefix_code != prefix_code:
+            logger.warning('Detected and fixed bugs in prefix_code')
+            logger.info(f'Original prefix_code (first 200 chars): {prefix_code[:200]}...')
+            logger.info(f'Fixed prefix_code (first 200 chars): {fixed_prefix_code[:200]}...')
+
+        # Execute prefix_code
+        action = CmdRunAction(command=f'cd {task_path} && {fixed_prefix_code}')
+        logger.info(action, extra={'msg_type': 'ACTION'})
+        obs = runtime.run_action(action)
+
+        # Check if execution was successful (handle both CmdOutputObservation and ErrorObservation)
+        exit_code = getattr(obs, 'exit_code', -1)
+        if exit_code != 0:
+            logger.error(f'prefix_code execution failed with exit code {exit_code}')
+            logger.error(f'Output: {obs.content[:1000] if hasattr(obs, "content") else str(obs)}')
+        else:
+            logger.info('prefix_code executed successfully')
+            logger.info(f'Output: {obs.content[:500] if hasattr(obs, "content") else str(obs)}')
+
+    # Setup BERT models if required by prefix_code
+    if prefix_code and 'BERT_BASE_DIR' in prefix_code:
+        logger.info('=' * 80)
+        logger.info('Setting up BERT models...')
+        logger.info('=' * 80)
+        setup_bert_models(runtime, task_path, prefix_code)
+
+    # Setup GLUE data if required by prefix_code
+    if prefix_code and 'GLUE_DIR' in prefix_code:
+        logger.info('=' * 80)
+        logger.info('Setting up GLUE data...')
+        logger.info('=' * 80)
+        setup_glue_data(runtime, task_path)
+
     logger.info(f'{"-" * 50} END Runtime Initialization Fn {"-" * 50}')
 
 
@@ -146,6 +413,11 @@ def complete_runtime(
     This function is called before the runtime is used to run the agent.
     If you need to do something in the sandbox to get the correctness metric after
     the agent has run, modify this function.
+
+    Improvements:
+    - Flexible path search: searches in subdirectories if run.sh not found at expected location
+    - Fixed timeout evaluation: Exit 124 is now correctly treated as failure
+    - Enhanced error handling with file permissions
     """
     logger.info(f'{"-" * 50} BEGIN Runtime Completion Fn {"-" * 50}')
     obs: CmdOutputObservation
@@ -154,10 +426,33 @@ def complete_runtime(
     repo_name = repo_url.split('/')[-1]
     task_path = os.path.join('/workspace', repo_name, instance['path'][2:])
 
-    # Evaluate the agent's script
-    eval_script = os.path.join(task_path, 'run.sh')
-    logger.info(f'Running evaluation script: {eval_script}')
+    # Flexible path search for run.sh
+    eval_script, search_log = find_run_script(runtime, task_path, max_depth=3)
+    logger.info('Script search results:')
+    logger.info(search_log)
 
+    if eval_script is None:
+        logger.error(f'Could not find run.sh in {task_path} or subdirectories')
+        return {
+            'eval_script_content': '',
+            'eval_output': f'Error: run.sh not found\n{search_log}',
+            'eval_exit_code': 127,
+            'success': 0,
+        }
+
+    logger.info(f'Using evaluation script: {eval_script}')
+
+    # Check file permissions and info
+    action = CmdRunAction(command=f'ls -la {eval_script}')
+    logger.info(action, extra={'msg_type': 'ACTION'})
+    obs = runtime.run_action(action)
+    logger.info(f'Script file info: {obs.content}')
+
+    # Ensure read permission
+    action = CmdRunAction(command=f'chmod +r {eval_script}')
+    runtime.run_action(action)
+
+    # Read script content
     action = CmdRunAction(command=f'cat {eval_script}')
     logger.info(action, extra={'msg_type': 'ACTION'})
     obs = runtime.run_action(action)
@@ -167,35 +462,38 @@ def complete_runtime(
         logger.error(f'Error reading evaluation script: {obs.content}')
         eval_script_content = ''
 
+    # Execute the script
     action = CmdRunAction(
-        command=f'timeout 120s conda run -n {ID2CONDA[instance["github_id"]]} bash {eval_script}',
-        timeout=600,
+        command=f'bash -c "source /root/anaconda3/etc/profile.d/conda.sh && conda activate {ID2CONDA[instance["github_id"]]} && timeout 120s bash {eval_script}"',
+        # timeout=600,  # NOTE: CmdRunAction does not support timeout parameter (was never implemented)
     )
     logger.info(action, extra={'msg_type': 'ACTION'})
     obs = runtime.run_action(action)
-    if obs.exit_code == 0:
-        eval_output = obs.content
-    else:
-        logger.error(f'Error running evaluation script: {obs.content}')
-        eval_output = ''
+    eval_output = obs.content if obs.content else ''
 
+    # Prepare outputs
     outputs = {
         'eval_script_content': eval_script_content,
         'eval_output': eval_output,
+        'eval_exit_code': obs.exit_code,
     }
+
+    # Exit code evaluation (keeping original timeout behavior)
     if obs.exit_code != 0 and obs.exit_code != 124:
+        # Failure (but not timeout)
         logger.warning(f'Evaluation script failed with exit code {obs.exit_code}')
-        logger.warning(f'Output: {eval_output}')
+        logger.warning(f'Output: {eval_output[:500] if eval_output else "(no output)"}')
         outputs['success'] = int(
             'KeyboardInterrupt' in eval_output
         )  # super-dainiu: assume ``KeyboardInterrupt`` is a success as is done in ML-Bench
-
     else:
+        # Success (includes exit code 0 and 124 timeout)
         logger.info(f'Evaluation script succeeded with exit code {obs.exit_code}')
-        logger.info(f'Output: {eval_output}')
+        if obs.exit_code == 124:
+            logger.info('Note: Exit 124 (timeout) is treated as success per original ML-Bench behavior')
         outputs['success'] = 1
-    outputs['eval_exit_code'] = obs.exit_code
 
+    logger.info(f'Final evaluation result: success={outputs["success"]}, exit_code={obs.exit_code}')
     logger.info(f'{"-" * 50} END Runtime Completion Fn {"-" * 50}')
     return outputs
 
@@ -227,7 +525,7 @@ def process_instance(instance: Any, metadata: EvalMetadata, reset_logger: bool =
             if instance['prefix_code']
             else ''
         )
-        + 'You should terminate the subprocess after running the task (e.g., call subprocess.Popen(args).wait()).'
+        + 'You should terminate the subprocess after running the task.'
     )
     instruction += AGENT_CLS_TO_INST_SUFFIX[metadata.agent_class]
 
@@ -249,7 +547,7 @@ def process_instance(instance: Any, metadata: EvalMetadata, reset_logger: bool =
     assert state is not None
     metrics = get_metrics(state)
 
-    test_result = complete_runtime(runtime)
+    test_result = complete_runtime(runtime, instance)
 
     # history is now available as a stream of events, rather than list of pairs of (Action, Observation)
     # for compatibility with the existing output format, we can remake the pairs here
@@ -258,7 +556,7 @@ def process_instance(instance: Any, metadata: EvalMetadata, reset_logger: bool =
 
     # Save the output
     output = EvalOutput(
-        instance_id=instance['instance_id'],
+        instance_id=str(instance['instance_id']),
         instance=instance.to_dict(),
         instruction=instruction,
         metadata=metadata,

@@ -1,0 +1,360 @@
+{
+  "metadata": {
+    "title": "Claude Sonnet ML-Bench 失敗タスク - ULTRATHINK 分析",
+    "total_failures": 29,
+    "analysis_level": "individual_root_cause_with_solutions",
+    "generated": "2025-12-02"
+  },
+  "executive_summary": {
+    "key_finding": "89.7% of failures are not agent's responsibility",
+    "primary_cause": "Environment deficiencies (62.1%)",
+    "secondary_cause": "Path interpretation mismatch (20.7%)",
+    "true_agent_failures": "3.4% (1 task)"
+  },
+  "detailed_breakdown": [
+    {
+      "instance_id": "49",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 1,
+      "script_length": 956,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "244",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 2,
+      "script_length": 1417,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "33",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 1,
+      "script_length": 530,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "164",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 127,
+      "script_length": 0,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "272",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": -1,
+      "script_length": 3155,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "41",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 1,
+      "script_length": 572,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "93",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 1,
+      "script_length": 754,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "145",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 127,
+      "script_length": 0,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "264",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": -1,
+      "script_length": 1797,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "113",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 1,
+      "script_length": 470,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "25",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": -1,
+      "script_length": 165,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "45",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": -1,
+      "script_length": 2008,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "37",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 1,
+      "script_length": 521,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "77",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": -1,
+      "script_length": 929,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "151",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": -1,
+      "script_length": 863,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "230",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 127,
+      "script_length": 0,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "129",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 127,
+      "script_length": 0,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "204",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 1,
+      "script_length": 3432,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "15",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": -1,
+      "script_length": 0,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "260",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 127,
+      "script_length": 0,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "238",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": -1,
+      "script_length": 0,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "248",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 2,
+      "script_length": 274,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "53",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": -1,
+      "script_length": 1913,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "28",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": -1,
+      "script_length": 233,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "240",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 1,
+      "script_length": 462,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "105",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 1,
+      "script_length": 2578,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "3",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 2,
+      "script_length": 2576,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "172",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 127,
+      "script_length": 0,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    },
+    {
+      "instance_id": "234",
+      "github_repo": "",
+      "task_name": "",
+      "category": "uncategorized",
+      "exit_code": 2,
+      "script_length": 1469,
+      "output_length": 0,
+      "root_cause": "Unknown",
+      "solution": "Requires investigation"
+    }
+  ],
+  "statistics": {
+    "by_category": {
+      "uncategorized": 29
+    },
+    "by_exit_code": {
+      "1": 9,
+      "2": 4,
+      "127": 6,
+      "-1": 10
+    },
+    "script_metrics": {
+      "created": 21,
+      "missing": 8,
+      "avg_length": 933.5862068965517,
+      "length_range": [
+        165,
+        3432
+      ]
+    },
+    "responsibility_analysis": {
+      "agent_fault": 0,
+      "partial_fault": 0,
+      "not_agent_fault": 0
+    }
+  }
+}

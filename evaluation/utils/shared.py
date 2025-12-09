@@ -746,6 +746,10 @@ def get_openhands_config_for_eval(
     from openhands.core.config.openhands_config import (
         OpenHandsConfig as _OHConfig,  # type: ignore
     )
+    from openhands.core.config import load_openhands_config
+
+    # Load base config from config.toml to get search_api_key and other settings
+    base_config = load_openhands_config()
 
     # Use provided sandbox config or get default
     if sandbox_config is None:
@@ -783,6 +787,8 @@ def get_openhands_config_for_eval(
         workspace_mount_path=workspace_mount_path,
         file_store='local',
         file_store_path=eval_store,
+        # Copy search_api_key from base config (loaded from config.toml)
+        search_api_key=base_config.search_api_key,
     )
 
     return config

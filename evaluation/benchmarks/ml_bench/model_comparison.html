@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML-Bench Model Comparison</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .model-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .model-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .model-card.rank-1 {
+            border-left-color: #ffd700;
+            background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+        }
+
+        .model-card.rank-2 {
+            border-left-color: #c0c0c0;
+        }
+
+        .model-card.rank-3 {
+            border-left-color: #cd7f32;
+        }
+
+        .model-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .model-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .rank-badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .rank-badge.gold {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #333;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .stat-value.success {
+            color: #28a745;
+        }
+
+        .success-bar {
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .success-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 0.5s ease;
+        }
+
+        .links {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .link-btn {
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.2s;
+        }
+
+        .link-btn:hover {
+            background: #5568d3;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .comparison-table {
+            margin-top: 40px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 ML-Bench Model Comparison</h1>
+            <p>Performance comparison across different language models</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Generated: 2025-11-20 14:58:51</p>
+        </div>
+
+        <div class="content">
+            <h2 style="margin-bottom: 20px;">Model Rankings</h2>
+
+            <div class="model-card rank-1">
+                <div class="model-header">
+                    <div class="model-name">#1 Claude Sonnet 4.5</div>
+                    <div class="rank-badge gold">
+                        🥇 
+                        Rank 1
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Success Rate</div>
+                        <div class="stat-value success">57.4%</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Successes</div>
+                        <div class="stat-value">39/68</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Failures</div>
+                        <div class="stat-value">29</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Max Iterations</div>
+                        <div class="stat-value">100</div>
+                    </div>
+                </div>
+
+                <div class="success-bar">
+                    <div class="success-fill" style="width: 57.4%">
+                        57.4%
+                    </div>
+                </div>
+
+                <div class="links">
+                    <a href="visualizations_claude_sonnet_iter100/report.html" class="link-btn">📊 View Report</a>
+                </div>
+            </div>
+
+            <div class="model-card rank-2">
+                <div class="model-header">
+                    <div class="model-name">#2 GPT-4o</div>
+                    <div class="rank-badge ">
+                        🥈 
+                        Rank 2
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Success Rate</div>
+                        <div class="stat-value success">47.1%</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Successes</div>
+                        <div class="stat-value">32/68</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Failures</div>
+                        <div class="stat-value">36</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Max Iterations</div>
+                        <div class="stat-value">50</div>
+                    </div>
+                </div>
+
+                <div class="success-bar">
+                    <div class="success-fill" style="width: 47.1%">
+                        47.1%
+                    </div>
+                </div>
+
+                <div class="links">
+                    <a href="visualizations_gpt4o_iter50/report.html" class="link-btn">📊 View Report</a>
+                </div>
+            </div>
+
+            <div class="model-card rank-3">
+                <div class="model-header">
+                    <div class="model-name">#3 GPT-5</div>
+                    <div class="rank-badge ">
+                        🥉 
+                        Rank 3
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Success Rate</div>
+                        <div class="stat-value success">41.2%</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Successes</div>
+                        <div class="stat-value">28/68</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Failures</div>
+                        <div class="stat-value">40</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Max Iterations</div>
+                        <div class="stat-value">50</div>
+                    </div>
+                </div>
+
+                <div class="success-bar">
+                    <div class="success-fill" style="width: 41.2%">
+                        41.2%
+                    </div>
+                </div>
+
+                <div class="links">
+                    <a href="visualizations_gpt5_iter50/report.html" class="link-btn">📊 View Report</a>
+                </div>
+            </div>
+
+            <div class="comparison-table">
+                <h2 style="margin-bottom: 20px;">Detailed Comparison</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Model</th>
+                            <th>Success Rate</th>
+                            <th>Successes</th>
+                            <th>Failures</th>
+                            <th>Total</th>
+                            <th>Max Iterations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td><strong>#1</strong></td>
+                            <td><strong>Claude Sonnet 4.5</strong></td>
+                            <td><strong style="color: #28a745;">57.4%</strong></td>
+                            <td>39</td>
+                            <td>29</td>
+                            <td>68</td>
+                            <td>100</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>#2</strong></td>
+                            <td><strong>GPT-4o</strong></td>
+                            <td><strong style="color: #28a745;">47.1%</strong></td>
+                            <td>32</td>
+                            <td>36</td>
+                            <td>68</td>
+                            <td>50</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>#3</strong></td>
+                            <td><strong>GPT-5</strong></td>
+                            <td><strong style="color: #28a745;">41.2%</strong></td>
+                            <td>28</td>
+                            <td>40</td>
+                            <td>68</td>
+                            <td>50</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>ML-Bench Evaluation Results</p>
+            <p>Dataset: ml-bench-quarter (68 instances)</p>
+        </div>
+    </div>
+</body>
+</html>

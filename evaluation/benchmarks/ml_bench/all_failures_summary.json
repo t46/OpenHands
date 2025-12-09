@@ -1,0 +1,263 @@
+[
+  {
+    "id": "49",
+    "exit_code": 1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 956,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: bert\n\nMy current endeavor revolves around the pre-training of the uncased_L-12_"
+  },
+  {
+    "id": "244",
+    "exit_code": 2,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 1417,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: muzic\n\nI am eager to begin the task of Pre-training using the train_mask.sh scr"
+  },
+  {
+    "id": "33",
+    "exit_code": 1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 530,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: bert\n\nAhoy! I find myself embarking on an exciting quest that involves harnessi"
+  },
+  {
+    "id": "164",
+    "exit_code": 127,
+    "category": "パスの齟齬",
+    "reason": "エージェントがサブディレクトリに作成、評価は見つけられず",
+    "script_length": 0,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: esm\n\nCan you assist me in writing the code to extract 3 designs from the struct"
+  },
+  {
+    "id": "272",
+    "exit_code": -1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 3155,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: Grounded-Segment-Anything\n\nI am interested in utilizing the grounding dino demo"
+  },
+  {
+    "id": "41",
+    "exit_code": 1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 572,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: bert\n\nI am embarking on an ambitious mission to pre-train the powerful ./model/"
+  },
+  {
+    "id": "93",
+    "exit_code": 1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 754,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: if\n\nCould you assist me in generating four visuals of dogs utilizing the IF-II-"
+  },
+  {
+    "id": "145",
+    "exit_code": 127,
+    "category": "パスの齟齬",
+    "reason": "エージェントがサブディレクトリに作成、評価は見つけられず",
+    "script_length": 0,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: vid2vid\n\nIn order to improve performance, I would suggest utilizing the label2c"
+  },
+  {
+    "id": "264",
+    "exit_code": -1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 1797,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: Grounded-Segment-Anything\n\nI am interested in utilizing the grounding dino demo"
+  },
+  {
+    "id": "113",
+    "exit_code": 1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 470,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: if\n\nI have an image named 'example.jpg' that shows a dog on a desk and I would "
+  },
+  {
+    "id": "25",
+    "exit_code": -1,
+    "category": "不完全なスクリプト",
+    "reason": "スクリプトが短すぎる/不完全",
+    "script_length": 165,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: dgl\n\nI am in need of your expertise to guide me through the process of utilizin"
+  },
+  {
+    "id": "45",
+    "exit_code": -1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 2008,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: bert\n\nHear ye, noble savant of programming! I beseech thee to lend me thy wisdo"
+  },
+  {
+    "id": "37",
+    "exit_code": 1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 521,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: bert\n\nBehold, a formidable quest awaits - the pre-training of the unparalleled "
+  },
+  {
+    "id": "77",
+    "exit_code": -1,
+    "category": "実行エラー",
+    "reason": "スクリプトは作成されたが、実行時エラー",
+    "script_length": 929,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: lavis\n\nI have an image titled 'test.jpg' and I'm interested in utilizing the bl"
+  },
+  {
+    "id": "151",
+    "exit_code": -1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 863,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: esm\n\nI need assistance in writing code to utilize esm_msa1b_t12_100M_UR50S() fo"
+  },
+  {
+    "id": "230",
+    "exit_code": 127,
+    "category": "パスの齟齬",
+    "reason": "エージェントがサブディレクトリに作成、評価は見つけられず",
+    "script_length": 0,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: Time-Series-Library\n\nI am attempting to use Crossformer model for the specific "
+  },
+  {
+    "id": "129",
+    "exit_code": 127,
+    "category": "パスの齟齬",
+    "reason": "エージェントがサブディレクトリに作成、評価は見つけられず",
+    "script_length": 0,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: vid2vid\n\nWe have the task of training the edge2face model on a face dataset. Le"
+  },
+  {
+    "id": "204",
+    "exit_code": 1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 3432,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: pytorch-image-models\n\nI am embarking on an ImageNet training endeavor and in di"
+  },
+  {
+    "id": "15",
+    "exit_code": -1,
+    "category": "スクリプト未作成",
+    "reason": "エージェントがrun.shを作成しなかった",
+    "script_length": 0,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: dgl\n\nI have a deep desire to embark on a journey brimming with knowledge and ex"
+  },
+  {
+    "id": "260",
+    "exit_code": 127,
+    "category": "パスの齟齬",
+    "reason": "エージェントがサブディレクトリに作成、評価は見つけられず",
+    "script_length": 0,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: muzic\n\nI am interested in exploring the realm of Text-to-Music Generation. For "
+  },
+  {
+    "id": "238",
+    "exit_code": -1,
+    "category": "スクリプト未作成",
+    "reason": "エージェントがrun.shを作成しなかった",
+    "script_length": 0,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: Time-Series-Library\n\nI'm looking to evaluate the performance of my TimesNet mod"
+  },
+  {
+    "id": "248",
+    "exit_code": 2,
+    "category": "実行エラー",
+    "reason": "スクリプトは作成されたが、実行時エラー",
+    "script_length": 274,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: muzic\n\nI am interested in performing Fine-tuning on style classification. The b"
+  },
+  {
+    "id": "53",
+    "exit_code": -1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 1913,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: bert\n\nIn pursuit of a monumental feat, my aim is to unleash the full potential "
+  },
+  {
+    "id": "28",
+    "exit_code": -1,
+    "category": "実行エラー",
+    "reason": "スクリプトは作成されたが、実行時エラー",
+    "script_length": 233,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: PyTorch-GAN\n\nLooking to use the Cluster GAN model to a project I'm working on. "
+  },
+  {
+    "id": "240",
+    "exit_code": 1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 462,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: learning3d\n\nI am interested in running a training process for the pcn model. To"
+  },
+  {
+    "id": "105",
+    "exit_code": 1,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 2578,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: if\n\nTime to create a visual masterpiece! I am excited to recreate 'image'.jpg i"
+  },
+  {
+    "id": "3",
+    "exit_code": 2,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 2576,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: PyTorch-GAN\n\nThe model that I prefer to use is Enhanced Super-Resolution GAN. M"
+  },
+  {
+    "id": "172",
+    "exit_code": 127,
+    "category": "パスの齟齬",
+    "reason": "エージェントがサブディレクトリに作成、評価は見つけられず",
+    "script_length": 0,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: esm\n\nCan you assist me in writing the code to sample 3 designs of structure exa"
+  },
+  {
+    "id": "234",
+    "exit_code": 2,
+    "category": "環境問題",
+    "reason": "スクリプトは作成されたが、データ/モデル/依存関係が不足",
+    "script_length": 1469,
+    "claimed_success": true,
+    "instruction": "Please complete the Machine Learning task in the following repository: Time-Series-Library\n\nCan you assist me in writing some code? I'm dealing with a"
+  }
+]

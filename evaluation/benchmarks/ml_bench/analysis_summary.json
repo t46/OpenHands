@@ -1,0 +1,41 @@
+{
+  "report_generated": "2025-11-19 15:38:28",
+  "evaluation_info": {
+    "model": "gpt-5",
+    "max_iterations": 50,
+    "agent_class": "CodeActAgent",
+    "dataset": "ml-bench-quarter",
+    "start_time": "2025-11-17 21:26:38"
+  },
+  "overall_statistics": {
+    "total_tasks": 68,
+    "successful_tasks": 28,
+    "failed_tasks": 40,
+    "success_rate_percent": 41.18
+  },
+  "exit_code_distribution": {
+    "-1": {"count": 10, "percentage": 14.7, "description": "Internal error or exception"},
+    "0": {"count": 22, "percentage": 32.4, "description": "Successful execution"},
+    "1": {"count": 25, "percentage": 36.8, "description": "General error"},
+    "2": {"count": 5, "percentage": 7.4, "description": "Misuse of shell command"},
+    "124": {"count": 6, "percentage": 8.8, "description": "Timeout"}
+  },
+  "key_insights": [
+    "Success rate is 41.18% (28/68 tasks)",
+    "Most common failure mode is exit code 1 (36.8% of all tasks)",
+    "Timeout issues (exit code 124) affect 8.8% of tasks",
+    "Internal errors (exit code -1) occur in 14.7% of cases",
+    "22 tasks (32.4%) completed successfully with exit code 0"
+  ],
+  "recommendations": [
+    "Investigate tasks with exit code 1 to identify common failure patterns",
+    "Review timeout cases to optimize performance or increase timeout limits",
+    "Analyze internal errors (exit code -1) to improve error handling",
+    "Document successful task patterns for replication"
+  ],
+  "output_files": {
+    "html_report": "visualizations/report.html",
+    "text_summary": "visualizations/summary.txt",
+    "json_summary": "analysis_summary.json"
+  }
+}

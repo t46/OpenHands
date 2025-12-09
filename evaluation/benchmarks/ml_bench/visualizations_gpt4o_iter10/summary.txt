@@ -1,0 +1,100 @@
+
+╔════════════════════════════════════════════════════════════════╗
+║         ML-Bench Evaluation Results Summary                    ║
+╚════════════════════════════════════════════════════════════════╝
+
+Generated: 2025-11-19 15:59:57
+
+📊 OVERALL STATISTICS
+────────────────────────────────────────────────────────────
+  Total Tasks:        68
+  Successful Tasks:   18 ✓
+  Failed Tasks:       50 ✗
+  Success Rate:       26.47%
+
+🔢 EXIT CODE DISTRIBUTION
+────────────────────────────────────────────────────────────
+  Exit Code  -1: ███                                                  5 (  7.4%)
+  Exit Code   0: ███████████                                         15 ( 22.1%)
+  Exit Code   1: █████████                                           13 ( 19.1%)
+  Exit Code 124: ██                                                   3 (  4.4%)
+  Exit Code 127: ███████████████████████                             32 ( 47.1%)
+
+📋 TASK RESULTS
+────────────────────────────────────────────────────────────
+  Task    3: ✗ FAIL (Exit: 127)
+  Task    5: ✗ FAIL (Exit: 1)
+  Task    6: ✓ PASS (Exit: 124)
+  Task    9: ✗ FAIL (Exit: 1)
+  Task   11: ✗ FAIL (Exit: 127)
+  Task   15: ✗ FAIL (Exit: 1)
+  Task   16: ✗ FAIL (Exit: 127)
+  Task   17: ✗ FAIL (Exit: 127)
+  Task   23: ✓ PASS (Exit: 124)
+  Task   25: ✗ FAIL (Exit: -1)
+  Task   28: ✗ FAIL (Exit: 1)
+  Task   29: ✓ PASS (Exit: 124)
+  Task   32: ✗ FAIL (Exit: 127)
+  Task   33: ✓ PASS (Exit: 0)
+  Task   37: ✗ FAIL (Exit: 1)
+  Task   41: ✗ FAIL (Exit: 127)
+  Task   45: ✗ FAIL (Exit: 127)
+  Task   49: ✓ PASS (Exit: 0)
+  Task   53: ✗ FAIL (Exit: 127)
+  Task   61: ✗ FAIL (Exit: 127)
+  Task   65: ✗ FAIL (Exit: 127)
+  Task   73: ✗ FAIL (Exit: 127)
+  Task   77: ✗ FAIL (Exit: 127)
+  Task   81: ✗ FAIL (Exit: 127)
+  Task   85: ✗ FAIL (Exit: 127)
+  Task   89: ✗ FAIL (Exit: 127)
+  Task   93: ✗ FAIL (Exit: -1)
+  Task  101: ✗ FAIL (Exit: 127)
+  Task  105: ✗ FAIL (Exit: 127)
+  Task  109: ✗ FAIL (Exit: 1)
+  Task  113: ✗ FAIL (Exit: 127)
+  Task  117: ✗ FAIL (Exit: 127)
+  Task  121: ✓ PASS (Exit: 0)
+  Task  129: ✓ PASS (Exit: 0)
+  Task  141: ✗ FAIL (Exit: 127)
+  Task  145: ✗ FAIL (Exit: 127)
+  Task  151: ✗ FAIL (Exit: -1)
+  Task  164: ✗ FAIL (Exit: 1)
+  Task  168: ✗ FAIL (Exit: 1)
+  Task  172: ✗ FAIL (Exit: 127)
+  Task  176: ✗ FAIL (Exit: 127)
+  Task  198: ✓ PASS (Exit: 0)
+  Task  202: ✗ FAIL (Exit: 127)
+  Task  204: ✗ FAIL (Exit: 127)
+  Task  210: ✗ FAIL (Exit: 127)
+  Task  214: ✓ PASS (Exit: 0)
+  Task  228: ✗ FAIL (Exit: 1)
+  Task  230: ✓ PASS (Exit: 0)
+  Task  232: ✗ FAIL (Exit: 1)
+  Task  234: ✗ FAIL (Exit: 127)
+  Task  236: ✗ FAIL (Exit: 1)
+  Task  238: ✗ FAIL (Exit: 127)
+  Task  240: ✗ FAIL (Exit: 1)
+  Task  242: ✓ PASS (Exit: 0)
+  Task  244: ✓ PASS (Exit: 0)
+  Task  246: ✓ PASS (Exit: 0)
+  Task  248: ✓ PASS (Exit: 0)
+  Task  252: ✓ PASS (Exit: 0)
+  Task  254: ✗ FAIL (Exit: 127)
+  Task  256: ✓ PASS (Exit: 0)
+  Task  260: ✗ FAIL (Exit: 127)
+  Task  264: ✗ FAIL (Exit: -1)
+  Task  264: ✗ FAIL (Exit: 127)
+  Task  268: ✓ PASS (Exit: 0)
+  Task  268: ✗ FAIL (Exit: 127)
+  Task  272: ✗ FAIL (Exit: -1)
+  Task  276: ✗ FAIL (Exit: 1)
+  Task  280: ✓ PASS (Exit: 0)
+
+────────────────────────────────────────────────────────────
+ℹ️  METADATA
+────────────────────────────────────────────────────────────
+  Model:            gpt-4o
+  Max Iterations:   10
+  Agent Class:      CodeActAgent
+  Start Time:       2025-11-13 17:04:41
