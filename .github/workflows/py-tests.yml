@@ -39,7 +39,7 @@ jobs:
       - name: Setup Node.js
         uses: useblacksmith/setup-node@v5
         with:
-          node-version: "22.x"
+          node-version: "22.23.4"
       - name: Install poetry via pipx
         run: pipx install poetry
       - name: Set up Python
