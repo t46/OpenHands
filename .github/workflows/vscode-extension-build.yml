@@ -25,14 +25,14 @@ jobs:
   # Validate VSCode extension builds correctly
   validate-vscode-extension:
     name: Validate VSCode Extension Build
-    runs-on: blacksmith-4vcpu-ubuntu-2204
+    runs-on: ${{ github.event_name == 'pull_request' && github.repository == 't46/OpenHands' && 'ubuntu-24.04' || 'blacksmith-4vcpu-ubuntu-2204' }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: useblacksmith/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: '22.23.4'
       - name: Set up Python
@@ -135,7 +135,7 @@ jobs:
 
   release:
     name: Create GitHub Release
-    runs-on: blacksmith-4vcpu-ubuntu-2204
+    runs-on: ${{ github.event_name == 'pull_request' && github.repository == 't46/OpenHands' && 'ubuntu-24.04' || 'blacksmith-4vcpu-ubuntu-2204' }}
     needs: validate-vscode-extension
     if: startsWith(github.ref, 'refs/tags/ext-v')
 
